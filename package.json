@@ -1,0 +1,16 @@
+{
+  "name": "amredi",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix apps/mobile start",
+    "typecheck": "npm --prefix apps/mobile run typecheck",
+    "export:web": "npm --prefix apps/mobile run export:web",
+    "test:database": "node supabase/tests/access.mjs",
+    "format": "prettier --write apps/mobile/src docs README.md",
+    "lint": "npm --prefix apps/mobile run lint"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.12",
+    "prettier": "3.9.10"
+  }
+}

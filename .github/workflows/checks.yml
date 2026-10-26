@@ -1,0 +1,27 @@
+name: Amredi checks
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            apps/mobile/package-lock.json
+      - run: npm ci
+      - run: npm --prefix apps/mobile ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test:database
+      - run: npm run export:web
+      - run: npm --prefix apps/mobile run export:android
+      - run: npm --prefix apps/mobile audit --omit=dev --audit-level=high
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amredi-web-preview
+          path: apps/mobile/dist

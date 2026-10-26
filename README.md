@@ -22,11 +22,11 @@ Without environment settings the welcome screen works and authentication explain
 
 ## First slice
 
-Welcome, email registration/sign-in/reset request, encrypted native session storage, profile/goal creation, published programme pagination, programme details, duplicate-safe applications, staff-assisted mentor requests, light/dark appearance, and honest messaging/Amina placeholders.
+Welcome, email registration/sign-in/reset request, encrypted native session storage, profile/goal creation, published programme pagination, programme details, duplicate-safe applications, staff-assisted mentor requests, light/dark appearance, and an Amina placeholder. The second slice adds assigned mentor conversations, realtime message invalidation, paginated history, duplicate-safe sends, blocking, private reports, and in-app OTP password recovery. See docs/supabase-setup.md for the required recovery email template.
 
 ## Remaining release work
 
-Mentor/partner/admin portals and role model; mentor assignment; private chat and moderation; milestones; M-Pesa ledger and reconciliation; Amina; Kiswahili; account deletion/export; password recovery deep-link completion; verified consent and safeguarding journeys for under-18 members; notifications; real device accessibility/performance tests. This is a development foundation, not a launch-ready service.
+Mentor/partner/admin portals and role model; mentor assignment; full moderation console and operational escalation; milestones; M-Pesa ledger and reconciliation; Amina; Kiswahili; account deletion/export; hosted OTP recovery verification; verified consent and safeguarding journeys for under-18 members; notifications; real device accessibility/performance tests. This is a development foundation, not a launch-ready service.
 
 Programme publication is restricted to trusted database operators in this slice. Never put a service-role key, M-Pesa credential or AI key in an EXPO_PUBLIC variable.
 
