@@ -2,9 +2,11 @@ import React from "react";
 import { FlatList, View } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import { conversations } from "../../conversations";
+import { useSession } from "../../session";
+import { conversations, conversationName } from "../../conversations";
 import { Button, Card, Copy, Empty, s } from "../../ui";
 export default function Messages() {
+  const { session } = useSession();
   const query = useQuery({
     queryKey: ["conversations"],
     queryFn: conversations,
@@ -33,7 +35,7 @@ export default function Messages() {
       renderItem={({ item }) => (
         <Card>
           <Copy strong size={22}>
-            {item.mentorships.mentors?.display_name || "Your mentor"}
+            {conversationName(item, session?.user.id || "")}
           </Copy>
           <Copy muted>
             {item.blocked_by

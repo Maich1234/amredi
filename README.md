@@ -24,6 +24,10 @@ Without environment settings the welcome screen works and authentication explain
 
 Welcome, email registration/sign-in/reset request, encrypted native session storage, profile/goal creation, published programme pagination, programme details, duplicate-safe applications, staff-assisted mentor requests, light/dark appearance, and an Amina placeholder. The second slice adds assigned mentor conversations, realtime message invalidation, paginated history, duplicate-safe sends, blocking, private reports, and in-app OTP password recovery. See docs/supabase-setup.md for the required recovery email template.
 
+## Third slice
+
+Approved mentor workspace, assigned member goals, shared milestones, and staff-only programme draft/publication and application-review tools. Final decisions require confirmation. Apply the third migration and grant staff approval through a trusted operator; details in docs/supabase-setup.md.
+
 ## Remaining release work
 
 Mentor/partner/admin portals and role model; mentor assignment; full moderation console and operational escalation; milestones; M-Pesa ledger and reconciliation; Amina; Kiswahili; account deletion/export; hosted OTP recovery verification; verified consent and safeguarding journeys for under-18 members; notifications; real device accessibility/performance tests. This is a development foundation, not a launch-ready service.

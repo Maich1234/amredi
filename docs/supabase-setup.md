@@ -20,3 +20,13 @@ Closed mentorships retain participant-readable history but cannot receive messag
 ## Remaining deployment verification
 
 Verify OTP emails and expiry, signout/recovery, realtime reconnect, offline retry/deduplication, blocking from both accounts, report visibility, invalid API requests and hosted database advisors. Local SQL tests emulate auth.uid(); they do not validate the hosted project's authentication settings.
+
+## Staff and mentor workspaces
+
+Apply the third migration before opening the new workspace routes. The trusted operator grants staff access by adding an existing Auth UUID to public.staff_members with active=true; revoke immediately by setting active=false. No client may create or update these approvals.
+
+Approved users open **You → Open my workspace**. Mentors see active assigned profiles and their goals; staff see programme drafts and applications. Staff can create/edit/publish a programme and move applications submitted → under_review → accepted/declined. Final decisions require a confirmation in the app; terminal decisions cannot be reversed in the client. Staff cannot decide their own application.
+
+Milestones are proposed by either participant in an active verified mentorship, then agreed and completed by the assigned mentor. Closed mentorships retain readable milestones but cannot add or change them. A revoked mentor loses active-profile and milestone-write access on the next database request. Staff approval does not automatically grant private chat/milestone access.
+
+Before production: add staff audit trails, organisation-specific permissions, application-decision notifications, operational moderation, archival/deletion flows and hosted tests. This first staff workspace runs in the Expo app/web export; a separate organisation portal has not been built.

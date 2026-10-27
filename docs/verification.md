@@ -13,3 +13,9 @@
 ## Second slice
 
 Both migrations pass isolated SQL tests, including assignment-only messages, sender/date spoofing denial, private reports, block/unblock ownership, duplicate nonce rejection, server-side rate limiting and closed-assignment denial. No hosted Supabase project named Amredi was available; no unrelated project was changed. OTP recovery and realtime require hosted/device verification.
+
+## Third slice
+
+Verified the prior GitHub workflow: lint, typecheck, database tests, web export and Android export passed; the audit step failed on the five previously documented Expo CLI findings. Registry audit on 2026-10-27 still reports five high findings; no forced SDK downgrade was applied.
+
+New isolated database tests cover staff approval/revocation, draft visibility/publication, application state transitions and immutable ownership, mentor-only active profile access, proposed/agreed/completed milestone transitions, duplicate milestone IDs and closed-assignment denial. UI includes confirmation before final application decisions. Staff audit logging and a separate partner portal remain pending.

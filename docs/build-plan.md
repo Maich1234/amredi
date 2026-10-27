@@ -23,9 +23,9 @@ Native sessions use SecureStore. Web preview sessions stay in memory. Query data
 
 ## Next stages
 
-1. Real Supabase project setup, SMTP, full recovery deep links and two-user device tests.
-2. Verified mentor and organisation access with explicit memberships and narrow RLS; admin work queues and audit records.
-3. Assignment-scoped conversations, block/report, moderation, milestone and attendance tracking.
+1. Real Supabase project setup, SMTP, OTP recovery verification and two-user device tests.
+2. Mentor workspace and staff programme/application tools are implemented in Expo. Next: organisation-scoped memberships, operational queues and audit records.
+3. Assignment-scoped chat, blocking/report intake and shared milestones are implemented. Next: staffed moderation and attendance tracking.
 4. Donation ledger and authenticated M-Pesa initiation, verified callbacks and idempotent reconciliation.
 5. Amina navigation support with approved resources and evaluated boundaries.
 6. Kiswahili, deletion/export, guardian/consent path appropriate to pilot age range, notification privacy, branded launch assets.

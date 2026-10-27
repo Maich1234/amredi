@@ -63,6 +63,16 @@ export default function Support() {
           </Copy>
           <Copy muted>{c.mentorships.mentors?.bio}</Copy>
           <Button
+            secondary
+            label="Our milestones"
+            onPress={() =>
+              router.push({
+                pathname: "/milestones/[id]",
+                params: { id: c.mentorship_id },
+              })
+            }
+          />
+          <Button
             label="Open conversation"
             onPress={() =>
               router.push({ pathname: "/chat/[id]", params: { id: c.id } })

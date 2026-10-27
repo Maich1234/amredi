@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import { router } from "expo-router";
+import { useAccess } from "../../access";
 import { db } from "../../backend";
 import { useProfile } from "../../queries";
 import { useTheme } from "../../theme";
 import { Button, Card, Copy, s } from "../../ui";
 export default function Profile() {
   const profile = useProfile();
+  const access = useAccess();
   const { dark, toggle } = useTheme();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -40,6 +42,19 @@ export default function Profile() {
           onPress={() => router.push("/onboarding")}
         />
       </Card>
+      {access.isError && (
+        <Button
+          secondary
+          label="Retry workspace access"
+          onPress={() => void access.refetch()}
+        />
+      )}
+      {(access.data?.staff || access.data?.mentor) && (
+        <Button
+          label="Open my workspace"
+          onPress={() => router.push("/workspace")}
+        />
+      )}
       <Button
         secondary
         label={

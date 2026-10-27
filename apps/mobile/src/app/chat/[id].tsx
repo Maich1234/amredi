@@ -9,7 +9,11 @@ import {
 import { randomUUID } from "expo-crypto";
 import { db } from "../../backend";
 import { useSession } from "../../session";
-import { Conversation, conversationFields } from "../../conversations";
+import {
+  Conversation,
+  conversationFields,
+  conversationName,
+} from "../../conversations";
 import { useTheme } from "../../theme";
 import { Button, Card, Copy, Field } from "../../ui";
 type Message = {
@@ -172,8 +176,9 @@ export default function Chat() {
     >
       <View style={{ paddingHorizontal: 24, paddingVertical: 12, gap: 8 }}>
         <Copy strong size={20}>
-          {conversation.data?.mentorships.mentors?.display_name ||
-            "Private conversation"}
+          {conversation.data
+            ? conversationName(conversation.data, session.user.id)
+            : "Private conversation"}
         </Copy>
         {conversation.isError ? (
           <Button

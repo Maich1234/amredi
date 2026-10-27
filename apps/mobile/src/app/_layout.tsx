@@ -30,6 +30,27 @@ function Routes() {
         <Stack.Screen name="onboarding" options={{ title: "Make it yours" }} />
         <Stack.Screen name="recover" options={{ title: "Recover account" }} />
         <Stack.Screen name="chat/[id]" options={{ title: "Conversation" }} />
+        <Stack.Screen name="workspace/index" options={{ title: "Workspace" }} />
+        <Stack.Screen
+          name="workspace/mentorships"
+          options={{ title: "My mentorships" }}
+        />
+        <Stack.Screen
+          name="workspace/programmes"
+          options={{ title: "Programmes" }}
+        />
+        <Stack.Screen
+          name="workspace/programme/[id]"
+          options={{ title: "Programme editor" }}
+        />
+        <Stack.Screen
+          name="workspace/applications/[id]"
+          options={{ title: "Applications" }}
+        />
+        <Stack.Screen
+          name="milestones/[id]"
+          options={{ title: "Our milestones" }}
+        />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="programme/[id]"
