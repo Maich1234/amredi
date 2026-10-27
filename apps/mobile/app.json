@@ -10,7 +10,11 @@
       "bundleIdentifier": "com.amredi.app"
     },
     "android": {
-      "package": "com.amredi.app"
+      "package": "com.amredi.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundColor": "#FFFFFF"
+      }
     },
     "web": {
       "bundler": "metro"
@@ -19,6 +23,17 @@
       "expo-router",
       "expo-secure-store"
     ],
-    "scheme": "amredi"
+    "scheme": "amredi",
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "42ace0f2-5bc6-42fa-8b20-bce0948c78b8"
+      }
+    },
+    "owner": "maich123"
   }
 }

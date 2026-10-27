@@ -1,1 +1,36 @@
-{"cli":{"appVersionSource":"remote"},"build":{"development":{"developmentClient":true,"distribution":"internal"},"preview":{"distribution":"internal","android":{"buildType":"apk"}},"production":{"autoIncrement":true}}}
+{
+  "cli": {
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "developmentClient": false,
+      "env": {
+        "AMREDI_APK_VARIANT": "phone"
+      }
+    },
+    "production": {
+      "autoIncrement": true
+    },
+    "preview-arm64": {
+      "extends": "preview",
+      "env": {
+        "AMREDI_APK_VARIANT": "arm64"
+      }
+    },
+    "preview-universal": {
+      "extends": "preview",
+      "env": {
+        "AMREDI_APK_VARIANT": "universal"
+      }
+    }
+  }
+}

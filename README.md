@@ -39,3 +39,7 @@ Mentor/partner/admin portals and role model; mentor assignment; full moderation 
 Programme publication is restricted to trusted database operators in this slice. Never put a service-role key, M-Pesa credential or AI key in an EXPO_PUBLIC variable.
 
 See docs/build-plan.md for implementation and release gates.
+
+## Android test APK
+
+See docs/android-testing.md for the optimized standalone release profiles and current build status. JavaScript is bundled into release APKs; Supabase operations still need internet. Final APK size is measured only after a successful native build.

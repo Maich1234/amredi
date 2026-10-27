@@ -1,0 +1,23 @@
+# Only build inputs are needed by EAS.
+node_modules/
+**/node_modules/
+.expo/
+**/.expo/
+dist/
+**/dist/
+dist-android/
+**/dist-android/
+.env
+.env.*
+**/.env
+**/.env.*
+*.apk
+*.aab
+*.jks
+*.keystore
+*.log
+coverage/
+.git/
+.github/
+docs/
+supabase/

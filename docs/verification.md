@@ -22,6 +22,10 @@ The local SQL suite additionally checks sender/date spoofing, request/milestone 
 
 - Email delivery/SMTP, recovery-code email template, Auth password policy and actual sign-in/recovery tests on Android.
 - Installable APK, physical-device accessibility/performance and browser visual QA. Browser QA previously failed because Chromium was unavailable and its download returned invalid archives.
-- Default Expo launcher/splash assets remain placeholders; welcome uses an extracted original Amredi logo.
+- Launcher assets now use the extracted original Amredi mark; the splash and final high-resolution artwork still need production polish.
 - Five high dependency findings remain in Expo CLI dependencies (node-forge and bundled Zod included), documented by npm audit and the GitHub audit gate. No unsafe forced SDK downgrade was applied.
 - Donor/payment flows, Amina, formal safeguarding/consent, organisation-scoped partner access, notifications, attendance and account deletion/retention are not complete.
+
+## Optimized Android build preparation
+
+Standalone release APK profiles, R8/resource shrinking, compressed embedded Hermes bytecode and ARM phone ABI selection are configured and validated by isolated native prebuild. Lint/typecheck and production Android export pass. See docs/android-testing.md for measurements and the pending explicit Expo EAS upload authorization. No APK has been produced yet.
