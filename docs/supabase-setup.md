@@ -1,8 +1,17 @@
 # Connect a dedicated Amredi Supabase project
 
-The connected account had no project named Amredi at implementation time. Existing unrelated projects were not modified.
+Amredi is now provisioned in **Wabunifu**, through the **Maich** account connection.
 
-1. Create/select a dedicated project. Apply both versioned migrations in order. Run Supabase security/performance advisors before release.
+- Project reference: jeenyvbqxzwhojlwlnvr
+- Region: eu-central-1
+- API: https://jeenyvbqxzwhojlwlnvr.supabase.co
+- All five versioned migrations are applied. Local filenames match hosted migration history.
+- Public client configuration: apps/mobile/src/config.ts. Only the publishable key is committed.
+- Generated schema types: apps/mobile/src/database.types.ts.
+
+No SMTP or recovery-email-template changes were made through the available connector. Complete the Auth steps below in the dashboard before pilot email testing.
+
+1. For a new environment, create/select a dedicated project and apply all versioned migrations in order. The Amredi hosted project is already migrated. Security advisors currently report no findings; only unused-index informational notices remain in performance advisors.
 2. Add project URL and **publishable** key to apps/mobile/.env (see .env.example). Never add service-role or management credentials to mobile configuration.
 3. Enable email confirmation, configure SMTP and set password minimum to at least 10 characters. Configure rate limits appropriate to pilot traffic.
 4. In Auth → Email Templates → Reset Password include `{{ .Token }}` in the email body, with instructions to enter the code in Amredi. Recovery uses verifyOtp(email, token, type: recovery), followed by updateUser(password). It does not rely on an external browser redirect. Keep expiry short and test expired/reused codes. Do not log codes or session tokens.

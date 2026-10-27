@@ -2,8 +2,13 @@ import "react-native-url-polyfill/auto";
 import { createClient, processLock } from "@supabase/supabase-js";
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
-const url = process.env.EXPO_PUBLIC_SUPABASE_URL;
-const key = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+import type { Database } from "./database.types";
+import { publicSupabaseConfig } from "./config";
+const overrideUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
+const overrideKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+const hasOverrides = !!(overrideUrl || overrideKey);
+const url = hasOverrides ? overrideUrl : publicSupabaseConfig.url;
+const key = hasOverrides ? overrideKey : publicSupabaseConfig.publishableKey;
 // Web sessions stay in memory; never persist tokens in localStorage.
 const memory = new Map<string, string>();
 const storage = {
@@ -22,7 +27,7 @@ const storage = {
 };
 export const supabase =
   url && key
-    ? createClient(url, key, {
+    ? createClient<Database>(url, key, {
         auth: {
           storage,
           autoRefreshToken: true,

@@ -1,25 +1,27 @@
-# Verification and limits
+# Verification and remaining limits
 
-- TypeScript strict check passed.
-- PostgreSQL-compatible PGlite executed the migration and passed negative/positive permission tests (see supabase/tests/access.mjs). This does not replace a hosted Supabase test or its advisors.
-- Expo web export passed.
-- Expo Android JavaScript/Hermes bundle export passed. This is not an APK or a device test.
-- Root development dependencies audit: zero advisories at check time.
-- Mobile audit: five high findings in Expo CLI's dependency tree, including node-forge 1.4.0 (GHSA-86w9-cpqp-85rv) and bundled Zod 3.25.76 (GHSA-mrhx-c7xc-m3w5). App validation uses Zod 4.6.7. No safe upstream forge version was available from the registry. Do not force a downgrade to an incompatible Expo SDK or replace CLI's Zod with a breaking major version. CI's audit step intentionally blocks a clean security gate until upstream remediation or a documented reviewed mitigation.
-- No live project credentials were used. Auth emails, programme application submission against hosted Supabase, recovery, Realtime and physical-device behaviour remain unverified.
-- Initial splash/icon assets remain Expo placeholders; welcome uses an extracted original Amredi logo from the provided deck.
-- Browser visual QA could not run: Chromium is absent and its download returned invalid archives. Visual review and real-device interaction remain outstanding; export success is not presented as visual validation.
+## Current hosted backend (2026-10-27)
 
-## Second slice
+Amredi is active under Wabunifu on the Maich account connection, project jeenyvbqxzwhojlwlnvr. All five migrations are applied, and migration filenames are aligned with hosted history.
 
-Both migrations pass isolated SQL tests, including assignment-only messages, sender/date spoofing denial, private reports, block/unblock ownership, duplicate nonce rejection, server-side rate limiting and closed-assignment denial. No hosted Supabase project named Amredi was available; no unrelated project was changed. OTP recovery and realtime require hosted/device verification.
+- Hosted SQL tests pass for profile isolation, application ownership/deduplication, staff-only matching, idempotent matching retries, report excerpt capture/review, audit integrity and closed-assignment write denial.
+- Tests use temporary synthetic identities in a transaction that is rolled back. They exercise real PostgreSQL RLS and triggers, not the Auth email/JWT issuance flow.
+- Public Data API smoke check returned HTTP 401 for anonymous programme reads, as required.
+- Security advisor: no findings.
+- Performance advisor: missing foreign-key indexes and repeated SELECT-policy warnings resolved. Remaining unused-index notices are informational on this new database; indexes are retained for intended access patterns.
+- Every public application table has RLS enabled.
+- Typed Supabase client uses types generated from the hosted schema. Public configuration is shipped with the app; no server key is included.
 
-## Third slice
+## Local checks
 
-Verified the prior GitHub workflow: lint, typecheck, database tests, web export and Android export passed; the audit step failed on the five previously documented Expo CLI findings. Registry audit on 2026-10-27 still reports five high findings; no forced SDK downgrade was applied.
+Lint, strict TypeScript, complete isolated PGlite permission tests, web export and Android Hermes bundle export pass. A bundle export is not an installable APK or a device test.
 
-New isolated database tests cover staff approval/revocation, draft visibility/publication, application state transitions and immutable ownership, mentor-only active profile access, proposed/agreed/completed milestone transitions, duplicate milestone IDs and closed-assignment denial. UI includes confirmation before final application decisions. Staff audit logging and a separate partner portal remain pending.
+The local SQL suite additionally checks sender/date spoofing, request/milestone duplication, message throttling, staff revocation, assignment privacy, valid application/milestone transitions, report-review transitions, excerpt spoofing denial, client-immutable audit records and anonymous RPC denial.
 
-## Fourth slice
+## Remaining release work
 
-Expanded isolated tests cover atomic/idempotent mentor matching, invalid-mentor rollback, request closure, report excerpt capture and spoofing denial, report review transitions, client-immutable audit entries, direct private-trigger denial and staff revocation. Full private-chat SELECT remains denied to staff. Local lint/typecheck and web/Android bundle checks are run for this slice; live Supabase/Auth/device behaviour is still unverified.
+- Email delivery/SMTP, recovery-code email template, Auth password policy and actual sign-in/recovery tests on Android.
+- Installable APK, physical-device accessibility/performance and browser visual QA. Browser QA previously failed because Chromium was unavailable and its download returned invalid archives.
+- Default Expo launcher/splash assets remain placeholders; welcome uses an extracted original Amredi logo.
+- Five high dependency findings remain in Expo CLI dependencies (node-forge and bundled Zod included), documented by npm audit and the GitHub audit gate. No unsafe forced SDK downgrade was applied.
+- Donor/payment flows, Amina, formal safeguarding/consent, organisation-scoped partner access, notifications, attendance and account deletion/retention are not complete.

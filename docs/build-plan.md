@@ -23,7 +23,7 @@ Native sessions use SecureStore. Web preview sessions stay in memory. Query data
 
 ## Next stages
 
-1. Real Supabase project setup, SMTP, OTP recovery verification and two-user device tests.
+1. Dedicated Supabase project is provisioned and migrated; hosted RLS tests/advisors pass. Next: SMTP, OTP recovery verification and two-user device tests.
 2. Mentor workspace and staff programme/application tools are implemented in Expo. Mentor matching, report-review queues and staff audit records are also implemented. Next: organisation-scoped memberships and hosted verification.
 3. Assignment-scoped chat, blocking/report intake and shared milestones are implemented. Report review and member outcomes are implemented. Next: operational staffing/escalation, retention and attendance tracking.
 4. Donation ledger and authenticated M-Pesa initiation, verified callbacks and idempotent reconciliation.

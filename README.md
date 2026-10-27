@@ -7,18 +7,18 @@ Expo mobile app and Supabase backend connecting young mothers in Kenya with educ
 ## Run
 
 1. `npm --prefix apps/mobile ci`
-2. Copy `apps/mobile/.env.example` to `apps/mobile/.env`; set the Supabase URL and publishable key.
-3. Apply `supabase/migrations` to a dedicated Supabase project. Configure email confirmation and SMTP. Set password minimum to 10 or stronger in Auth.
-4. `npm start`
+2. `npm start`
 
-Without environment settings the welcome screen works and authentication explains the missing connection. No fake programmes, mentors or successful submissions are shown.
+The mobile app includes public client configuration for the dedicated **Amredi** Supabase project in **Wabunifu**. To use a different project, copy apps/mobile/.env.example to .env and provide both URL and publishable key; incomplete overrides disable the connection instead of mixing projects. No server/management credentials are included.
+
+All five migrations are applied to the hosted project. Configure email delivery, the recovery-code email template and Auth password policy before enabling email flows for pilot users. See docs/supabase-setup.md. Programmes and people are real database records; the app does not fabricate seed content.
 
 ## Checks
 
 - `npm run typecheck`
 - `npm run export:web`
 - `npm --prefix apps/mobile run export:android`
-- `npm ci && npm run test:database` — executes the migration and negative permission tests in an isolated PostgreSQL-compatible PGlite database. Hosted Supabase advisors and real Auth/device tests are still required before release.
+- `npm ci && npm run test:database` — executes the migration and negative permission tests in an isolated PostgreSQL-compatible PGlite database. Hosted RLS tests and advisors have also been run; real Auth/email/device tests remain required.
 
 ## First slice
 
