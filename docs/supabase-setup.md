@@ -30,3 +30,15 @@ Approved users open **You → Open my workspace**. Mentors see active assigned p
 Milestones are proposed by either participant in an active verified mentorship, then agreed and completed by the assigned mentor. Closed mentorships retain readable milestones but cannot add or change them. A revoked mentor loses active-profile and milestone-write access on the next database request. Staff approval does not automatically grant private chat/milestone access.
 
 Before production: add staff audit trails, organisation-specific permissions, application-decision notifications, operational moderation, archival/deletion flows and hosted tests. This first staff workspace runs in the Expo app/web export; a separate organisation portal has not been built.
+
+## Support operations (fourth migration)
+
+Staff now use Workspace → Mentor matching to assign a verified mentor to a pending request. The app asks staff to check fit, availability and agreement. This is a workflow confirmation, not a replacement for the pilot’s formal safeguarding/consent process.
+
+match_mentor is a SECURITY INVOKER transaction: it locks the request, creates one assignment and conversation, and marks the request matched. Repeating the same successful request/mentor pair returns the same assignment. close_mentorship closes the assignment and linked request together; participants keep history and may no longer send messages or change milestones. Members can then request a new mentor from Support.
+
+Staff review reports through Workspace → Review member reports. A trigger captures the reported message excerpt when the report is submitted; callers cannot supply or edit it. Staff receive that excerpt and the reason without blanket access to private chat history. Review states progress open → reviewed → resolved/dismissed; a final outcome is required and closed records cannot be changed by client accounts. The outcome is visible to the reporter under You → My reports. Another staff member must handle a staff member’s own report.
+
+Audit entries are appended by a private, non-callable SECURITY DEFINER trigger for programme changes, application decisions, assignments, request updates and report reviews. It validates non-null actors against active staff membership. Trusted database operations have a null actor and a separate source label. Client accounts cannot insert/update/delete entries. Audit stores record IDs, actions and state metadata rather than report reasons or message bodies. This protects against client tampering, not a privileged database operator. No audit records are backfilled for events before this migration.
+
+Hosted advisors, real Auth sessions and device testing remain required. Configure report staffing, retention/deletion, mentor verification and escalation procedures before pilot launch. New report excerpts are sensitive retained data and must follow the same retention policy as reports/messages.

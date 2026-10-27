@@ -62,6 +62,9 @@ export default function Support() {
             {c.mentorships.mentors?.display_name || "Your assigned mentor"}
           </Copy>
           <Copy muted>{c.mentorships.mentors?.bio}</Copy>
+          {c.mentorships.status === "closed" && (
+            <Copy muted>Mentorship closed · history available</Copy>
+          )}
           <Button
             secondary
             label="Our milestones"
@@ -97,7 +100,16 @@ export default function Support() {
             onPress={() => void request.refetch()}
           />
         ) : request.data ? (
-          <Copy strong>Request status: {request.data.status}</Copy>
+          <>
+            <Copy strong>Request status: {request.data.status}</Copy>
+            {request.data.status === "closed" && (
+              <Button
+                label="Request a new mentor"
+                busy={busy}
+                onPress={submit}
+              />
+            )}
+          </>
         ) : (
           <Button label="Request a mentor" busy={busy} onPress={submit} />
         )}

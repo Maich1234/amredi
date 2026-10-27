@@ -19,3 +19,7 @@ Both migrations pass isolated SQL tests, including assignment-only messages, sen
 Verified the prior GitHub workflow: lint, typecheck, database tests, web export and Android export passed; the audit step failed on the five previously documented Expo CLI findings. Registry audit on 2026-10-27 still reports five high findings; no forced SDK downgrade was applied.
 
 New isolated database tests cover staff approval/revocation, draft visibility/publication, application state transitions and immutable ownership, mentor-only active profile access, proposed/agreed/completed milestone transitions, duplicate milestone IDs and closed-assignment denial. UI includes confirmation before final application decisions. Staff audit logging and a separate partner portal remain pending.
+
+## Fourth slice
+
+Expanded isolated tests cover atomic/idempotent mentor matching, invalid-mentor rollback, request closure, report excerpt capture and spoofing denial, report review transitions, client-immutable audit entries, direct private-trigger denial and staff revocation. Full private-chat SELECT remains denied to staff. Local lint/typecheck and web/Android bundle checks are run for this slice; live Supabase/Auth/device behaviour is still unverified.

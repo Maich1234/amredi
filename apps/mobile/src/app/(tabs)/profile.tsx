@@ -42,6 +42,11 @@ export default function Profile() {
           onPress={() => router.push("/onboarding")}
         />
       </Card>
+      <Button
+        secondary
+        label="My reports"
+        onPress={() => router.push("/my-reports")}
+      />
       {access.isError && (
         <Button
           secondary

@@ -51,6 +51,23 @@ function Routes() {
           name="milestones/[id]"
           options={{ title: "Our milestones" }}
         />
+        <Stack.Screen
+          name="workspace/matching"
+          options={{ title: "Mentor matching" }}
+        />
+        <Stack.Screen
+          name="workspace/match/[id]"
+          options={{ title: "Choose mentor" }}
+        />
+        <Stack.Screen
+          name="workspace/reports"
+          options={{ title: "Member reports" }}
+        />
+        <Stack.Screen
+          name="workspace/audit"
+          options={{ title: "Audit history" }}
+        />
+        <Stack.Screen name="my-reports" options={{ title: "My reports" }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="programme/[id]"

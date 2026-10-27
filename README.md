@@ -28,6 +28,10 @@ Welcome, email registration/sign-in/reset request, encrypted native session stor
 
 Approved mentor workspace, assigned member goals, shared milestones, and staff-only programme draft/publication and application-review tools. Final decisions require confirmation. Apply the third migration and grant staff approval through a trusted operator; details in docs/supabase-setup.md.
 
+## Fourth slice
+
+Staff mentor matching/closure, report-review queues, member report outcomes and database-generated audit history. Report review uses a captured excerpt rather than access to full private chats. Apply the fourth migration before using these routes.
+
 ## Remaining release work
 
 Mentor/partner/admin portals and role model; mentor assignment; full moderation console and operational escalation; milestones; M-Pesa ledger and reconciliation; Amina; Kiswahili; account deletion/export; hosted OTP recovery verification; verified consent and safeguarding journeys for under-18 members; notifications; real device accessibility/performance tests. This is a development foundation, not a launch-ready service.

@@ -43,10 +43,28 @@ export default function Workspace() {
               <Copy strong size={23}>
                 Programme management
               </Copy>
-              <Copy muted>Publish opportunities and review applications.</Copy>
+              <Copy muted>
+                Publish opportunities, review applications and coordinate
+                support.
+              </Copy>
               <Button
                 label="Manage programmes"
                 onPress={() => router.push("/workspace/programmes")}
+              />
+              <Button
+                secondary
+                label="Mentor matching"
+                onPress={() => router.push("/workspace/matching")}
+              />
+              <Button
+                secondary
+                label="Review member reports"
+                onPress={() => router.push("/workspace/reports")}
+              />
+              <Button
+                secondary
+                label="Team audit history"
+                onPress={() => router.push("/workspace/audit")}
               />
             </Card>
           )}
