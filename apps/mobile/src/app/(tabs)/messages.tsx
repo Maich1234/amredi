@@ -24,7 +24,7 @@ export default function Messages() {
       keyExtractor={(c) => c.id}
       ListHeaderComponent={
         <View style={{ gap: 12, marginBottom: 16 }}>
-          <Copy size={34} strong>
+          <Copy size={28} strong>
             A space to connect.
           </Copy>
           <Copy muted>

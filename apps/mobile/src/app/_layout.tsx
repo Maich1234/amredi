@@ -1,4 +1,6 @@
 import React from "react";
+import { useFonts } from "expo-font";
+import { ActivityIndicator } from "react-native";
 import { Stack } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -22,6 +24,7 @@ function Routes() {
           headerStyle: { backgroundColor: colors.bg },
           headerTintColor: colors.text,
           headerShadowVisible: false,
+          headerTitleStyle: { fontFamily: "AmrediSans-Bold" },
           contentStyle: { backgroundColor: colors.bg },
         }}
       >
@@ -68,6 +71,39 @@ function Routes() {
           options={{ title: "Audit history" }}
         />
         <Stack.Screen name="my-reports" options={{ title: "My reports" }} />
+        <Stack.Screen
+          name="community/edit-profile"
+          options={{ title: "Community profile" }}
+        />
+        <Stack.Screen
+          name="community/compose"
+          options={{ title: "Your post" }}
+        />
+        <Stack.Screen
+          name="community/options"
+          options={{ title: "Post options" }}
+        />
+        <Stack.Screen
+          name="community/member"
+          options={{ title: "Community member" }}
+        />
+        <Stack.Screen
+          name="community/blocked"
+          options={{ title: "Blocked members" }}
+        />
+        <Stack.Screen
+          name="community/reports"
+          options={{ title: "Your reports" }}
+        />
+        <Stack.Screen name="post/[id]" options={{ title: "Conversation" }} />
+        <Stack.Screen
+          name="workspace/community"
+          options={{ title: "Community moderation" }}
+        />
+        <Stack.Screen
+          name="my-applications"
+          options={{ title: "Applications" }}
+        />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="programme/[id]"
@@ -78,6 +114,11 @@ function Routes() {
   );
 }
 export default function Root() {
+  const [loaded, error] = useFonts({
+    "AmrediSans-Regular": require("../../assets/fonts/AmrediSans-Regular.ttf"),
+    "AmrediSans-Bold": require("../../assets/fonts/AmrediSans-Bold.ttf"),
+  });
+  if (!loaded && !error) return <ActivityIndicator />;
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>

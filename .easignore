@@ -21,3 +21,6 @@ coverage/
 .github/
 docs/
 supabase/
+
+dist-web/
+**/dist-web/

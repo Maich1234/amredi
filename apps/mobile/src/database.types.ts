@@ -89,6 +89,225 @@ export type Database = {
         };
         Relationships: [];
       };
+      community_blocks: {
+        Row: {
+          blocked_id: string;
+          blocker_id: string;
+        };
+        Insert: {
+          blocked_id: string;
+          blocker_id: string;
+        };
+        Update: {
+          blocked_id?: string;
+          blocker_id?: string;
+        };
+        Relationships: [];
+      };
+      community_comments: {
+        Row: {
+          author_id: string;
+          body: string;
+          created_at: string;
+          hidden: boolean;
+          id: string;
+          post_id: string;
+        };
+        Insert: {
+          author_id: string;
+          body: string;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+          post_id: string;
+        };
+        Update: {
+          author_id?: string;
+          body?: string;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+          post_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "community_comments_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "community_profiles";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "community_comments_post_id_fkey";
+            columns: ["post_id"];
+            isOneToOne: false;
+            referencedRelation: "community_posts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      community_likes: {
+        Row: {
+          post_id: string;
+          user_id: string;
+        };
+        Insert: {
+          post_id: string;
+          user_id: string;
+        };
+        Update: {
+          post_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "community_likes_post_id_fkey";
+            columns: ["post_id"];
+            isOneToOne: false;
+            referencedRelation: "community_posts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      community_posts: {
+        Row: {
+          author_id: string;
+          body: string;
+          comments_enabled: boolean;
+          created_at: string;
+          hidden: boolean;
+          id: string;
+          image_alt: string;
+          image_path: string | null;
+        };
+        Insert: {
+          author_id: string;
+          body: string;
+          comments_enabled?: boolean;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+          image_alt?: string;
+          image_path?: string | null;
+        };
+        Update: {
+          author_id?: string;
+          body?: string;
+          comments_enabled?: boolean;
+          created_at?: string;
+          hidden?: boolean;
+          id?: string;
+          image_alt?: string;
+          image_path?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "community_posts_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "community_profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      community_profiles: {
+        Row: {
+          avatar_path: string | null;
+          bio: string;
+          display_name: string;
+          id: string;
+          interests: string;
+          role_intent: string;
+        };
+        Insert: {
+          avatar_path?: string | null;
+          bio?: string;
+          display_name: string;
+          id: string;
+          interests?: string;
+          role_intent?: string;
+        };
+        Update: {
+          avatar_path?: string | null;
+          bio?: string;
+          display_name?: string;
+          id?: string;
+          interests?: string;
+          role_intent?: string;
+        };
+        Relationships: [];
+      };
+      community_reports: {
+        Row: {
+          comment_id: string | null;
+          created_at: string;
+          excerpt: string;
+          id: string;
+          post_id: string | null;
+          reason: string;
+          reporter_id: string;
+          resolved: boolean;
+        };
+        Insert: {
+          comment_id?: string | null;
+          created_at?: string;
+          excerpt?: string;
+          id?: string;
+          post_id?: string | null;
+          reason: string;
+          reporter_id: string;
+          resolved?: boolean;
+        };
+        Update: {
+          comment_id?: string | null;
+          created_at?: string;
+          excerpt?: string;
+          id?: string;
+          post_id?: string | null;
+          reason?: string;
+          reporter_id?: string;
+          resolved?: boolean;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "community_reports_comment_id_fkey";
+            columns: ["comment_id"];
+            isOneToOne: false;
+            referencedRelation: "community_comments";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "community_reports_post_id_fkey";
+            columns: ["post_id"];
+            isOneToOne: false;
+            referencedRelation: "community_posts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      community_saves: {
+        Row: {
+          post_id: string;
+          user_id: string;
+        };
+        Insert: {
+          post_id: string;
+          user_id: string;
+        };
+        Update: {
+          post_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "community_saves_post_id_fkey";
+            columns: ["post_id"];
+            isOneToOne: false;
+            referencedRelation: "community_posts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       conversations: {
         Row: {
           blocked_by: string | null;

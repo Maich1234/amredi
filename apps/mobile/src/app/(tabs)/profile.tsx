@@ -5,9 +5,14 @@ import { useAccess } from "../../access";
 import { db } from "../../backend";
 import { useProfile } from "../../queries";
 import { useTheme } from "../../theme";
+import { useCommunityProfile } from "../../community/data";
+import { PrivateImage } from "../../community/media";
+import { useSession } from "../../session";
 import { Button, Card, Copy, s } from "../../ui";
 export default function Profile() {
   const profile = useProfile();
+  const community = useCommunityProfile();
+  const { session } = useSession();
   const access = useAccess();
   const { dark, toggle } = useTheme();
   const [busy, setBusy] = useState(false);
@@ -26,9 +31,50 @@ export default function Profile() {
   }
   return (
     <ScrollView contentContainerStyle={s.page}>
-      <Copy size={34} strong>
+      <Copy size={28} strong>
         Your journey. Your pace.
       </Copy>
+      <Card>
+        <PrivateImage
+          avatar
+          size={80}
+          path={community.data?.avatar_path ?? null}
+          label={
+            community.data?.display_name ?? profile.data?.display_name ?? "You"
+          }
+        />
+        <Copy strong size={24}>
+          {community.data?.display_name ?? "Your community profile"}
+        </Copy>
+        <Copy muted>
+          {community.data?.bio ||
+            "Share a little about yourself, at your pace."}
+        </Copy>
+        <Button
+          label="Edit community profile"
+          onPress={() => router.push("/community/edit-profile")}
+        />
+        <Button
+          secondary
+          label="View my posts"
+          onPress={() =>
+            router.push({
+              pathname: "/community/member",
+              params: { id: session!.user.id },
+            })
+          }
+        />
+        <Button
+          secondary
+          label="Community reports"
+          onPress={() => router.push("/community/reports")}
+        />
+        <Button
+          secondary
+          label="Blocked members"
+          onPress={() => router.push("/community/blocked")}
+        />
+      </Card>
       <Card>
         <Copy strong size={24}>
           {profile.data?.display_name || "Make yourself at home"}
@@ -36,6 +82,11 @@ export default function Profile() {
         <Copy muted>
           {profile.data?.goal || "Choose the next step that matters to you."}
         </Copy>
+        <Button
+          secondary
+          label="My applications"
+          onPress={() => router.push("/my-applications")}
+        />
         <Button
           secondary
           label="Edit my name and goal"
@@ -56,7 +107,11 @@ export default function Profile() {
       )}
       {(access.data?.staff || access.data?.mentor) && (
         <Button
-          label="Open my workspace"
+          label={
+            access.data?.staff
+              ? "Open staff workspace"
+              : "Open mentor workspace"
+          }
           onPress={() => router.push("/workspace")}
         />
       )}
@@ -70,8 +125,9 @@ export default function Profile() {
       <Card>
         <Copy strong>Your privacy matters.</Copy>
         <Copy muted>
-          Your profile and applications are shared only with authorised people
-          who need them to provide support.
+          Your community profile and posts are visible to signed-in members.
+          Your support goals and applications remain restricted to authorised
+          people providing support.
         </Copy>
       </Card>
       <Button secondary label="Sign out" onPress={signout} busy={busy} />

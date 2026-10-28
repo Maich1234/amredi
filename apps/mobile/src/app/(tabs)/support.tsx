@@ -52,7 +52,7 @@ export default function Support() {
   }
   return (
     <ScrollView contentContainerStyle={s.page}>
-      <Copy size={34} strong>
+      <Copy size={28} strong>
         Someone in your corner.
       </Copy>
       <Copy muted>Support starts with a conversation, at your pace.</Copy>
@@ -115,13 +115,6 @@ export default function Support() {
         )}
       </Card>
       {!!message && <Copy>{message}</Copy>}
-      <Card>
-        <Copy strong>Meet Amina, soon</Copy>
-        <Copy muted>
-          Guidance for finding your way around Amredi is planned for a later
-          release.
-        </Copy>
-      </Card>
     </ScrollView>
   );
 }

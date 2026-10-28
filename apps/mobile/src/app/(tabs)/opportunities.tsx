@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, ScrollView, Pressable } from "react-native";
 import { router } from "expo-router";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useTheme } from "../../theme";
 import { db, Programme } from "../../backend";
 import { Button, Card, Copy, Empty, s } from "../../ui";
 const PAGE = 15;
 export default function Opportunities() {
+  const { colors } = useTheme();
   const [category, setCategory] = useState("All");
   const query = useInfiniteQuery({
     queryKey: ["programmes", category],
@@ -33,20 +35,38 @@ export default function Opportunities() {
       keyExtractor={(p) => p.id}
       ListHeaderComponent={
         <View style={{ gap: 20, marginBottom: 20 }}>
-          <Copy size={34} strong>
+          <Copy size={28} strong>
             Room to grow.
           </Copy>
           <Copy muted>Find a practical next step that fits your life.</Copy>
-          <View style={{ gap: 8 }}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ gap: 8 }}
+          >
             {["All", "Skills", "Education", "Livelihood"].map((c) => (
-              <Button
+              <Pressable
                 key={c}
-                label={c}
-                secondary={c !== category}
+                accessibilityRole="button"
+                accessibilityState={{ selected: c === category }}
                 onPress={() => setCategory(c)}
-              />
+                style={{
+                  minHeight: 48,
+                  paddingHorizontal: 18,
+                  borderRadius: 24,
+                  borderWidth: 1,
+                  borderColor: c === category ? colors.pink : colors.line,
+                  backgroundColor:
+                    c === category ? colors.soft : colors.surface,
+                  justifyContent: "center",
+                }}
+              >
+                <Copy strong size={14}>
+                  {c}
+                </Copy>
+              </Pressable>
             ))}
-          </View>
+          </ScrollView>
         </View>
       }
       renderItem={({ item }) => (

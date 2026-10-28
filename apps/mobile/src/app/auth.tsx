@@ -24,7 +24,13 @@ export default function Auth() {
     setMessage("");
     try {
       const { data, error } = signup
-        ? await db().auth.signUp(valid.data)
+        ? await db().auth.signUp({
+            ...valid.data,
+            options: {
+              emailRedirectTo:
+                "https://amredi-confirmation-michael123s-projects-555405c0.vercel.app/",
+            },
+          })
         : await db().auth.signInWithPassword(valid.data);
       if (error) throw error;
       if (data.session) router.replace("/(tabs)");

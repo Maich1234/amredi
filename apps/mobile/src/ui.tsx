@@ -33,7 +33,7 @@ export function Copy({
         color: muted ? colors.muted : colors.text,
         fontSize: size,
         lineHeight: size * 1.45,
-        fontWeight: strong ? "700" : "400",
+        fontFamily: strong ? "AmrediSans-Bold" : "AmrediSans-Regular",
       }}
     >
       {children}
@@ -108,7 +108,8 @@ export function Button({
           <Text
             style={{
               color: secondary ? colors.pink : colors.bg,
-              fontWeight: "700",
+              fontFamily: "AmrediSans-Bold",
+              textAlign: "center",
               fontSize: 16,
             }}
           >
@@ -119,7 +120,11 @@ export function Button({
     </Animated.View>
   );
 }
-export function Field({ label, ...props }: TextInputProps & { label: string }) {
+export function Field({
+  label,
+  style,
+  ...props
+}: TextInputProps & { label: string }) {
   const { colors } = useTheme();
   return (
     <View style={{ gap: 7 }}>
@@ -136,6 +141,7 @@ export function Field({ label, ...props }: TextInputProps & { label: string }) {
             color: colors.text,
             borderColor: colors.line,
           },
+          style,
         ]}
         {...props}
       />
@@ -153,7 +159,7 @@ export function Empty({ title, body }: { title: string; body: string }) {
   );
 }
 export const s = StyleSheet.create({
-  card: { padding: 22, borderRadius: 24, borderWidth: 1, gap: 12 },
+  card: { padding: 18, borderRadius: 20, borderWidth: 1, gap: 12 },
   button: {
     minHeight: 52,
     borderRadius: 16,
@@ -167,10 +173,11 @@ export const s = StyleSheet.create({
     minHeight: 54,
     paddingHorizontal: 16,
     fontSize: 16,
+    fontFamily: "AmrediSans-Regular",
   },
   page: {
     padding: 24,
-    gap: 22,
+    gap: 16,
     paddingBottom: 40,
     width: "100%",
     maxWidth: 660,

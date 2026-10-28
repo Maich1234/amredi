@@ -11,8 +11,8 @@ export default function Workspace() {
   if (!session) return <Redirect href="/auth" />;
   return (
     <ScrollView contentContainerStyle={s.page}>
-      <Copy size={34} strong>
-        Make room for someone to grow.
+      <Copy size={28} strong>
+        Your workspace.
       </Copy>
       <Copy muted>Your approved tools, in one place.</Copy>
       {access.isPending ? (
@@ -60,6 +60,11 @@ export default function Workspace() {
                 secondary
                 label="Review member reports"
                 onPress={() => router.push("/workspace/reports")}
+              />
+              <Button
+                secondary
+                label="Review community reports"
+                onPress={() => router.push("/workspace/community")}
               />
               <Button
                 secondary
