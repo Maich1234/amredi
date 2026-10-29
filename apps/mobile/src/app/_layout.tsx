@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFonts } from "expo-font";
-import { ActivityIndicator } from "react-native";
+import { Image, Platform, View, useColorScheme } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
 import { Stack } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider, useTheme } from "../theme";
-import { SessionProvider } from "../session";
+import { SessionProvider, useSession } from "../session";
+
+// Hold the native brand mark until bundled fonts and the initial session are ready.
+if (Platform.OS !== "web") {
+  void SplashScreen.preventAutoHideAsync().catch(() => {});
+}
+function BrandedLoading() {
+  const dark = useColorScheme() === "dark";
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: dark ? "#19151A" : "#FBF8F7",
+      }}
+    >
+      <Image
+        accessibilityLabel="Amredi is loading"
+        source={
+          dark
+            ? require("../../assets/splash-icon-dark.png")
+            : require("../../assets/splash-icon.png")
+        }
+        style={{ width: 160, height: 160 }}
+      />
+    </View>
+  );
+}
+
 const client = new QueryClient({
   defaultOptions: {
     queries: { staleTime: 30000, retry: 1 },
@@ -16,6 +46,11 @@ const client = new QueryClient({
 });
 function Routes() {
   const { colors, dark } = useTheme();
+  const { loading } = useSession();
+  useEffect(() => {
+    if (!loading && Platform.OS !== "web") SplashScreen.hide();
+  }, [loading]);
+  if (loading) return <BrandedLoading />;
   return (
     <>
       <StatusBar style={dark ? "light" : "dark"} />
@@ -118,7 +153,7 @@ export default function Root() {
     "AmrediSans-Regular": require("../../assets/fonts/AmrediSans-Regular.ttf"),
     "AmrediSans-Bold": require("../../assets/fonts/AmrediSans-Bold.ttf"),
   });
-  if (!loaded && !error) return <ActivityIndicator />;
+  if (!loaded && !error) return <BrandedLoading />;
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
