@@ -6,7 +6,7 @@
     "@expo/vector-icons": "^15.0.2",
     "@supabase/supabase-js": "2.118.0",
     "@tanstack/react-query": "5.105.0",
-    "expo": "~58.0.19",
+    "expo": "~58.0.21",
     "expo-build-properties": "~58.0.11",
     "expo-constants": "~58.0.13",
     "expo-crypto": "~58.0.7",
@@ -49,5 +49,11 @@
     "export:android": "expo export --platform android --output-dir dist-android",
     "lint": "expo lint"
   },
-  "private": true
+  "private": true,
+  "overrides": {
+    "@expo/cli": {
+      "zod": "4.6.7"
+    },
+    "node-forge": "1.4.2"
+  }
 }

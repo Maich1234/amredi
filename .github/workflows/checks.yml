@@ -16,6 +16,7 @@ jobs:
       - run: npm --prefix apps/mobile ci
       - run: npm run lint
       - run: npm run typecheck
+      - run: npm run test:tooling
       - run: npm run test:database
       - run: npm run export:web
       - run: npm --prefix apps/mobile run export:android
