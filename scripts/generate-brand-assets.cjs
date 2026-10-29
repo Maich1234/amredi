@@ -36,7 +36,9 @@ function svg({
     ["splash-icon-dark.png", { extent: 720, color: "#F29DC4" }],
     ["favicon.png", { size: 64, extent: 54, background: "#FBF8F7" }],
   ]) {
-    await sharp(svg(options)).png().toFile(path.join(assets, name));
+    const pipeline = sharp(svg(options));
+    if (options.background) pipeline.removeAlpha();
+    await pipeline.png().toFile(path.join(assets, name));
   }
   await sharp({
     create: { width: 1024, height: 1024, channels: 3, background: "#FFFFFF" },
